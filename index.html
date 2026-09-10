@@ -1,0 +1,2482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CFO ACQUISITIONS &mdash; RNS PDMR MONITOR</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Newsreader:ital,wght@0,500;0,600;1,500&display=swap');
+  :root{--paper:#0c0d0a;--paper2:#131410;--line:#2a2c24;--ink:#e8e6d9;--ink-dim:#8c8d7c;
+        --wire:#c9a13b;--buy:#7fae6a;--noise:#5a5c4e;--flag:#b3542f;--review:#7a8fb0;--assoc:#9a86c4;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.5;}
+  .tape{background:var(--paper2);border-bottom:1px solid var(--line);padding:6px 24px;font-size:11px;
+        letter-spacing:.08em;color:var(--wire);white-space:nowrap;overflow:hidden;}
+  header{padding:36px 24px 20px;border-bottom:1px solid var(--line);}
+  .eyebrow{font-size:11px;letter-spacing:.18em;color:var(--ink-dim);text-transform:uppercase;}
+  h1{font-family:'Newsreader',serif;font-style:italic;font-weight:500;font-size:38px;margin:6px 0 8px;letter-spacing:-.01em;}
+  .sub{color:var(--ink-dim);font-size:12.5px;max-width:680px;}
+  .sub code{color:var(--wire);}
+  .meta-row{display:flex;gap:28px;margin-top:22px;flex-wrap:wrap;}
+  .stat{border-left:2px solid var(--line);padding-left:12px;}
+  .stat .n{font-size:22px;font-weight:700;}
+  .stat .l{font-size:10.5px;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase;}
+  main{max-width:1080px;margin:0 auto;padding:28px 24px 80px;}
+  .section-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);
+        display:flex;align-items:center;gap:10px;margin:36px 0 14px;}
+  .section-label::after{content:"";flex:1;height:1px;background:var(--line);}
+  .table-wrap{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;}
+  thead th{text-align:left;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
+        font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line);}
+  thead th.num{text-align:right;}
+  tbody td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:hover{background:rgba(201,161,59,.04);}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .co{font-weight:700;}
+  .tk{color:var(--ink-dim);font-size:11px;}
+  .role{color:var(--wire);font-size:11px;}
+  .val{font-weight:700;font-size:14px;}
+  .flag-hi .val{color:var(--flag);}
+  .pct{font-size:11px;color:var(--ink-dim);}
+  td.dt{font-size:11px;color:var(--ink-dim);white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .src a{color:var(--wire);text-decoration:none;font-size:11px;border-bottom:1px dotted var(--wire);}
+  .src a:hover{color:var(--ink);}
+  .badge{display:inline-block;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;
+        border:1px solid currentColor;border-radius:2px;}
+  .badge.material{color:var(--flag);}
+  .badge.standard{color:var(--buy);}
+  .badge.review{color:var(--review);}
+  .badge.assoc{color:var(--assoc);}
+  .badge.muted{color:var(--ink-dim);}
+  .excluded tbody td{color:var(--noise);}
+  .excluded .co,.excluded .val{color:var(--noise);}
+  .why{font-size:11px;color:var(--noise);font-style:italic;}
+  .empty{border:1px dashed var(--line);padding:22px;color:var(--ink-dim);font-size:12px;text-align:center;}
+  .method{background:var(--paper2);border:1px solid var(--line);padding:18px 20px;font-size:12px;color:var(--ink-dim);margin-top:40px;}
+  .method b{color:var(--ink);}
+  .method .filters{display:flex;gap:0;margin-top:12px;font-size:11px;flex-wrap:wrap;}
+  .method .filters div{padding:8px 14px;border-right:1px solid var(--line);}
+  .method .filters div:first-child{padding-left:0;}
+  .method .filters .k{color:var(--ink-dim);text-transform:uppercase;letter-spacing:.06em;font-size:9.5px;}
+  .method .filters .v{color:var(--ink);margin-top:2px;}
+  footer{padding:24px;text-align:center;color:var(--ink-dim);font-size:10.5px;letter-spacing:.06em;border-top:1px solid var(--line);}
+  @media (max-width:720px){h1{font-size:28px;}}
+</style>
+</head>
+<body>
+
+<div class="tape"><span>RNS/LSE &middot; investegate.co.uk/category/directors-dealings &middot; 04 Sep 2026 01:03 PM to 27 Aug 2026 11:55 AM &middot; ART.19 MAR NOTIFICATIONS &middot; GENERATED 10 Sep 2026 03:23 UTC</span></div>
+
+<header>
+  <div class="eyebrow">Director / PDMR Dealings &mdash; Filtered</div>
+  <h1>CFO acquisitions, ranked by materiality</h1>
+  <p class="sub">Scrapes the RNS <code>Director/PDMR Shareholding</code> category, parses each
+  Article&nbsp;19 MAR notification, keeps only <b>Chief Financial Officer</b> blocks, and strips
+  scrip-dividend, SIP and share-award noise to isolate genuine open-market cash purchases.
+  Dealings by the CFO&rsquo;s closely associated persons, the <b>General Counsel</b> and the
+  GC&rsquo;s closely associated persons are surfaced in a separate section below, tagged
+  Purchase / Sale / Other.</p>
+  <div class="meta-row">
+    <div class="stat"><div class="n">296</div><div class="l">PDMR blocks parsed</div></div>
+    <div class="stat"><div class="n">44</div><div class="l">CFO-tagged</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">Open-market cash buys</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">GC &amp; assoc. dealings</div></div>
+    <div class="stat"><div class="n">287</div><div class="l">Excluded</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">Flagged for review</div></div>
+  </div>
+</header>
+
+<main>
+  <div class="section-label">Material CFO purchases</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Company</th><th>CFO</th><th>Date</th><th class="num">Value</th><th class="num">Shares</th>
+      <th class="num">Price</th><th class="num">% of holding</th><th>Signal</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr class="">
+        <td><div class="co">Chesnara</div><div class="tk">LSE: CSN</div></td>
+        <td><div class="who">Thomas Howard</div><div class="role">Group Chief Financial Officer</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£49,701</td>
+        <td class="num">14,490</td>
+        <td class="num">£3.43</td>
+        <td class="num pct">&mdash;</td>
+        <td><span class="badge review">Needs review</span></td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/chesnara--csn/director-pdmr-shareholding/9739915" target="_blank" rel="noopener">RNS 9739915</a></td>
+      </tr>
+      <tr class="">
+        <td><div class="co">Safestore Holdings</div><div class="tk">LSE: SAFE</div></td>
+        <td><div class="who">SIMON CLINTON</div><div class="role">PDMR, CHIEF FINANCIAL OFFICER</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£34,817</td>
+        <td class="num">6,258</td>
+        <td class="num">£5.56</td>
+        <td class="num pct">&mdash;</td>
+        <td><span class="badge standard">Standard</span></td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/safestore-holdings--safe/director-pdmr-shareholding/9757177" target="_blank" rel="noopener">RNS 9757177</a></td>
+      </tr>
+      <tr class="">
+        <td><div class="co">Oxford Nanopore Technologies</div><div class="tk">LSE: ONT</div></td>
+        <td><div class="who">Nicholas Keher</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£24,867</td>
+        <td class="num">15,325</td>
+        <td class="num">£1.62</td>
+        <td class="num pct">&mdash;</td>
+        <td><span class="badge standard">Standard</span></td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/oxford-nanopore-technologies--ont/director-pdmr-shareholding/9756710" target="_blank" rel="noopener">RNS 9756710</a></td>
+      </tr>
+      <tr class="">
+        <td><div class="co">Getbusy</div><div class="tk">LSE: GETB</div></td>
+        <td><div class="who">Paul Haworth</div><div class="role">Chief financial officer</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£10,010</td>
+        <td class="num">13,188</td>
+        <td class="num">£0.76</td>
+        <td class="num pct">&mdash;</td>
+        <td><span class="badge standard">Standard</span></td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/getbusy--getb/director-pdmr-shareholding/9758883" target="_blank" rel="noopener">RNS 9758883</a></td>
+      </tr>
+    </tbody></table></div>
+
+  <div class="section-label">General Counsel &amp; closely-associated dealings</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Company</th><th>Person</th><th>Relationship</th><th>Type</th><th>Date</th>
+      <th class="num">Value</th><th class="num">Shares</th><th class="num">Price</th>
+      <th class="num">% of holding</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr class="">
+        <td><div class="co">Babcock International Group</div><div class="tk">LSE: BAB</div></td>
+        <td><div class="who">Rosemary Parratt</div><div class="role">Person closely associated with PDMR Jack Borrett, Group Company Secretary &amp; General Counsel</div></td>
+        <td><span class="badge assoc">Closely associated &middot; General Counsel</span></td>
+        <td><span class="badge material">Sale</span></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£244,750</td>
+        <td class="num">24,329</td>
+        <td class="num">£10.06</td>
+        <td class="num pct">&mdash;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/babcock-international-group--bab/director-pdmr-shareholding/9757304" target="_blank" rel="noopener">RNS 9757304</a></td>
+      </tr>
+      <tr class="">
+        <td><div class="co">Plus500 Ltd (DI)</div><div class="tk">LSE: PLUS</div></td>
+        <td><div class="who">Elad Even-Chen Consulting Service Ltd.</div><div class="role">Person Closely Associated with Elad Even-Chen CFO / PDMR</div></td>
+        <td><span class="badge assoc">Closely associated &middot; CFO</span></td>
+        <td><span title="nil consideration - award or grant, not a cash purchase" class="badge muted">Other</span></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00<div class="tk">0.00 as filed</div></td>
+        <td class="num">637,237</td>
+        <td class="num">0.00</td>
+        <td class="num pct">&mdash;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/plus500-ltd-di---plus/director-pdmr-dealing-and-total-voting-rights/9742151" target="_blank" rel="noopener">RNS 9742151</a></td>
+      </tr>
+      <tr class="">
+        <td><div class="co">Plus500 Ltd (DI)</div><div class="tk">LSE: PLUS</div></td>
+        <td><div class="who">To be held by a trustee for Elad Even-Chen Consulting Service Ltd.</div><div class="role">Person Closely Associated with Elad Even-Chen CFO / PDMR</div></td>
+        <td><span class="badge assoc">Closely associated &middot; CFO</span></td>
+        <td><span title="nil consideration - award or grant, not a cash purchase" class="badge muted">Other</span></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00<div class="tk">0.00 as filed</div></td>
+        <td class="num">729,869</td>
+        <td class="num">0.00</td>
+        <td class="num pct">&mdash;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/plus500-ltd-di---plus/director-pdmr-dealing-and-total-voting-rights/9742151" target="_blank" rel="noopener">RNS 9742151</a></td>
+      </tr>
+      <tr class="">
+        <td><div class="co">Hays</div><div class="tk">LSE: HAS</div></td>
+        <td><div class="who">Rachel Ford</div><div class="role">General Counsel &amp; Company Secretary, PDMR</div></td>
+        <td><span class="badge assoc">General Counsel</span></td>
+        <td><span title="nil consideration - award or grant, not a cash purchase" class="badge muted">Other</span></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">201,330</td>
+        <td class="num">£0.00</td>
+        <td class="num pct">&mdash;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hays--has/director-pdmr-shareholding/9757299" target="_blank" rel="noopener">RNS 9757299</a></td>
+      </tr>
+      <tr class="">
+        <td><div class="co">Hammerson</div><div class="tk">LSE: HMSO</div></td>
+        <td><div class="who">Alex Dunn</div><div class="role">General Counsel and Company Secretary (PDMR)</div></td>
+        <td><span class="badge assoc">General Counsel</span></td>
+        <td><span title="nil consideration - award or grant, not a cash purchase" class="badge muted">Other</span></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">5,909</td>
+        <td class="num">£0.00</td>
+        <td class="num pct">&mdash;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hammerson--hmso/director-pdmr-shareholding/9756952" target="_blank" rel="noopener">RNS 9756952</a></td>
+      </tr>
+    </tbody></table></div>
+
+  <div class="section-label">Excluded &mdash; real RNS filings, filtered out</div>
+  <div class="table-wrap"><table class="excluded">
+    <thead><tr><th>Company</th><th>PDMR</th><th>Date</th><th class="num">Value</th><th class="num">Shares</th>
+      <th>Reason excluded</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><div class="co">Morgan Sindall Group</div><div class="tk">LSE: MGNS</div></td>
+        <td><div class="who">John Morgan (shares held in Chase Nominees Limited A/C CMBLJEQ, Account no 4292850)</div><div class="role">Chief Executive</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£9,945,000</td>
+        <td class="num">225,000</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive&#x27;; transfer/gift, not a market purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/morgan-sindall-group--mgns/director-pdmr-shareholding/9741751" target="_blank" rel="noopener">RNS 9741751</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Morgan Sindall Group</div><div class="tk">LSE: MGNS</div></td>
+        <td><div class="who">FiveM Investments Limited (shares held in Chase Nominees Limited A/C CMBLJEQ, Account no 4371950)</div><div class="role">Family investment company being treated as a person closely associated with John Morgan, Chief Executive, for the purposes of this notification</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£9,945,000</td>
+        <td class="num">225,000</td>
+        <td class="why">person closely associated, not a CFO; unrecognised transaction type: &#x27;Receipt of 225,000 ordinary shares from John Morgan by FiveM Investments Limited&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/morgan-sindall-group--mgns/director-pdmr-shareholding/9741751" target="_blank" rel="noopener">RNS 9741751</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">BHP Group Limited NPV (DI)</div><div class="tk">LSE: BHP</div></td>
+        <td><div class="who">Geraldine Slattery</div><div class="role">PDMR (President Australia)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$1,590,198</td>
+        <td class="num">33,253</td>
+        <td class="why">role is not CFO: &#x27;PDMR (President Australia)&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bhp-group-limited-npv-di---bhp/pdmr-shareholding/9739363" target="_blank" rel="noopener">RNS 9739363</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Luceco</div><div class="tk">LSE: LUCE</div></td>
+        <td><div class="who">John Hornby</div><div class="role">Chief E xecutive Officer</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£1,131,503</td>
+        <td class="num">505,000</td>
+        <td class="why">role is not CFO: &#x27;Chief E xecutive Officer&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/luceco--luce/director-pdmr-shareholding/9737201" target="_blank" rel="noopener">RNS 9737201</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">CMC Markets</div><div class="tk">LSE: CMCX</div></td>
+        <td><div class="who">Matthew Lewis</div><div class="role">Head of ANZ</div></td>
+        <td class="dt">21 Aug 2026 +</td>
+        <td class="num val">£1,107,270</td>
+        <td class="num">150,000</td>
+        <td class="why">role is not CFO: &#x27;Head of ANZ&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cmc-markets--cmcx/director-pdmr-shareholding/9739316" target="_blank" rel="noopener">RNS 9739316</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Bloomsbury Publishing</div><div class="tk">LSE: BMY</div></td>
+        <td><div class="who">Nigel Newton</div><div class="role">Chief Executive</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£854,893</td>
+        <td class="num">130,319</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bloomsbury-publishing--bmy/director-pdmr-shareholdings/9741924" target="_blank" rel="noopener">RNS 9741924</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">BHP Group Limited NPV (DI)</div><div class="tk">LSE: BHP</div></td>
+        <td><div class="who">Vandita Pant</div><div class="role">PDMR (Chief Financial Officer)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$845,287</td>
+        <td class="num">17,676</td>
+        <td class="why">long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bhp-group-limited-npv-di---bhp/pdmr-shareholding/9739363" target="_blank" rel="noopener">RNS 9739363</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Unilever</div><div class="tk">LSE: ULVR</div></td>
+        <td><div class="who">Fabian Garcia</div><div class="role">Business Group President, Personal Care (a member of the Unilever Leadership Executive)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$733,549</td>
+        <td class="num">15,643</td>
+        <td class="why">role is not CFO: &#x27;Business Group President, Personal Care (a member of the Unilever Leadership Exe&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/unilever--ulvr/director-pdmr-shareholding/9737523" target="_blank" rel="noopener">RNS 9737523</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">BHP Group Limited NPV (DI)</div><div class="tk">LSE: BHP</div></td>
+        <td><div class="who">Brandon Craig</div><div class="role">PDMR (Chief Executive Officer)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$680,735</td>
+        <td class="num">14,235</td>
+        <td class="why">role is not CFO: &#x27;PDMR (Chief Executive Officer)&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bhp-group-limited-npv-di---bhp/pdmr-shareholding/9739363" target="_blank" rel="noopener">RNS 9739363</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Bloomsbury Publishing</div><div class="tk">LSE: BMY</div></td>
+        <td><div class="who">Keith Underwood</div><div class="role">Chief Financial &amp; Operating Officer</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£599,997</td>
+        <td class="num">91,463</td>
+        <td class="why">role is not CFO: &#x27;Chief Financial &amp; Operating Officer&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bloomsbury-publishing--bmy/director-pdmr-shareholdings/9741924" target="_blank" rel="noopener">RNS 9741924</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Keller Group</div><div class="tk">LSE: KLR</div></td>
+        <td><div class="who">Peter Wyton</div><div class="role">President, EME</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£594,200</td>
+        <td class="num">20,000</td>
+        <td class="why">role is not CFO: &#x27;President, EME&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/keller-group--klr/director-pdmr-shareholding/9743166" target="_blank" rel="noopener">RNS 9743166</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Bloomsbury Publishing</div><div class="tk">LSE: BMY</div></td>
+        <td><div class="who">Jenny Ridout</div><div class="role">Global Managing Director, Academic &amp; Professional Division</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£449,996</td>
+        <td class="num">68,597</td>
+        <td class="why">role is not CFO: &#x27;Global Managing Director, Academic &amp; Professional Division&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bloomsbury-publishing--bmy/director-pdmr-shareholdings/9741924" target="_blank" rel="noopener">RNS 9741924</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">GSK</div><div class="tk">LSE: GSK</div></td>
+        <td><div class="who">Maya Martinez-Davis</div><div class="role">President, US</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$426,685</td>
+        <td class="num">11,154</td>
+        <td class="why">role is not CFO: &#x27;President, US&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/gsk--gsk/director-pdmr-shareholding/9737347" target="_blank" rel="noopener">RNS 9737347</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">BHP Group Limited NPV (DI)</div><div class="tk">LSE: BHP</div></td>
+        <td><div class="who">Jessica Farrell</div><div class="role">PDMR (President Americas)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$370,614</td>
+        <td class="num">7,750</td>
+        <td class="why">role is not CFO: &#x27;PDMR (President Americas)&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bhp-group-limited-npv-di---bhp/pdmr-shareholding/9739363" target="_blank" rel="noopener">RNS 9739363</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">CMC Markets</div><div class="tk">LSE: CMCX</div></td>
+        <td><div class="who">Matthew Lewis</div><div class="role">Head of ANZ</div></td>
+        <td class="dt">21 Aug 2026 +</td>
+        <td class="num val">£366,500</td>
+        <td class="num">50,000</td>
+        <td class="why">role is not CFO: &#x27;Head of ANZ&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cmc-markets--cmcx/director-pdmr-shareholding/9739316" target="_blank" rel="noopener">RNS 9739316</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Stelrad Group</div><div class="tk">LSE: SRAD</div></td>
+        <td><div class="who">Robert Ellis</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£242,931</td>
+        <td class="num">166,734</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/stelrad-group--srad/director-pdmr-shareholding/9757163" target="_blank" rel="noopener">RNS 9757163</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Altitude Group</div><div class="tk">LSE: ALT</div></td>
+        <td><div class="who">Max Roberts</div><div class="role">Independent Non-Executive Director</div></td>
+        <td class="dt">30 Jun 2026</td>
+        <td class="num val">£225,000</td>
+        <td class="num">1,000,000</td>
+        <td class="why">role is not CFO: &#x27;Independent Non-Executive Director&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/altitude-group--alt/grant-of-options-and-pdmr-dealing/9739912" target="_blank" rel="noopener">RNS 9739912</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Cristina Diezhandino</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£198,416</td>
+        <td class="num">11,867</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Trekor Metals Limited</div><div class="tk">LSE: TKO</div></td>
+        <td><div class="who">Bryce Hamming</div><div class="role">Executive</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">172,009</td>
+        <td class="num">25,000</td>
+        <td class="why">role is not CFO: &#x27;Executive&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/trekor-metals-limited--tko/director-pdmr-shareholding/9742155" target="_blank" rel="noopener">RNS 9742155</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Pennon Group</div><div class="tk">LSE: PNN</div></td>
+        <td><div class="who">KEITH HASLETT</div><div class="role">GROUP CHIEF EXECUTIVE OFFICER</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£166,794</td>
+        <td class="num">35,947</td>
+        <td class="why">role is not CFO: &#x27;GROUP CHIEF EXECUTIVE OFFICER&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pennon-group--pnn/director-pdmr-shareholding/9738755" target="_blank" rel="noopener">RNS 9738755</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Dan Mobley</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£152,971</td>
+        <td class="num">9,149</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Ewan Andrew</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£151,383</td>
+        <td class="num">9,054</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Camilla Brown</div><div class="role">PCA of PDMR (Ian Brown)</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£149,999</td>
+        <td class="num">91,463</td>
+        <td class="why">person closely associated, not a CFO; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">GSK</div><div class="tk">LSE: GSK</div></td>
+        <td><div class="who">Maya Martinez-Davis</div><div class="role">President, US</div></td>
+        <td class="dt">20 Aug 2026</td>
+        <td class="num val">$148,999</td>
+        <td class="num">3,895</td>
+        <td class="why">role is not CFO: &#x27;President, US&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/gsk--gsk/director-pdmr-shareholding/9737347" target="_blank" rel="noopener">RNS 9737347</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cora Gold Limited (DI)</div><div class="tk">LSE: CORA</div></td>
+        <td><div class="who">Russell White</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£100,000</td>
+        <td class="num">1,000,000</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cora-gold-limited-di---cora/grant-of-share-options/9759866" target="_blank" rel="noopener">RNS 9759866</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">IWG</div><div class="tk">LSE: IWG</div></td>
+        <td><div class="who">Christian Schmitz</div><div class="role">CEO</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£91,300</td>
+        <td class="num">50,000</td>
+        <td class="why">role is not CFO: &#x27;CEO&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/iwg--iwg/director-pdmr-transaction/9742311" target="_blank" rel="noopener">RNS 9742311</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Alvaro Cardenas</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">$84,386</td>
+        <td class="num">1,265</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759695" target="_blank" rel="noopener">RNS 9759695</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Videndum</div><div class="tk">LSE: VID</div></td>
+        <td><div class="who">1.   Jan Peter Tewes</div><div class="role">1.   Chief Executive Officer, PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£84,039</td>
+        <td class="num">37,500</td>
+        <td class="why">role is not CFO: &#x27;1.   Chief Executive Officer, PDMR&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/videndum--vid/director-pdmr-shareholding/9739005" target="_blank" rel="noopener">RNS 9739005</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">John O&#x27;Keeffe</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£71,261</td>
+        <td class="num">4,262</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">John O&#x27;Keeffe</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£69,647</td>
+        <td class="num">4,163</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Petrotal Corporation NPV (DI)</div><div class="tk">LSE: PTAL</div></td>
+        <td><div class="who">Gavin Wilson</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£55,322</td>
+        <td class="num">199,000</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/petrotal-corporation-npv-di---ptal/director-dealing/9741703" target="_blank" rel="noopener">RNS 9741703</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Cristina Diezhandino</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£53,586</td>
+        <td class="num">3,203</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Hannah Brooks</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">$52,232</td>
+        <td class="num">783</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759695" target="_blank" rel="noopener">RNS 9759695</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Colin Godfrey</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£50,000</td>
+        <td class="num">30,488</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">James Dunlop</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£50,000</td>
+        <td class="num">30,488</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Aubrey Adams</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£49,200</td>
+        <td class="num">30,000</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Chesnara</div><div class="tk">LSE: CSN</div></td>
+        <td><div class="who">Steven Murray</div><div class="role">Group Chief Executive Officer</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£44,768</td>
+        <td class="num">13,102</td>
+        <td class="why">role is not CFO: &#x27;Group Chief Executive Officer&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/chesnara--csn/director-pdmr-shareholding/9739915" target="_blank" rel="noopener">RNS 9739915</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Cristina Diezhandino</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£42,736</td>
+        <td class="num">2,556</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ondo Insurtech</div><div class="tk">LSE: ONDO</div></td>
+        <td><div class="who">Greig Paterson</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">£41,537</td>
+        <td class="num">692,278</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ondo-insurtech--ondo/director-pdmr-shareholding/9757396" target="_blank" rel="noopener">RNS 9757396</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ondo Insurtech</div><div class="tk">LSE: ONDO</div></td>
+        <td><div class="who">Greig Paterson</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">£41,537</td>
+        <td class="num">692,278</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ondo-insurtech--ondo/director-pdmr-shareholding/9757396" target="_blank" rel="noopener">RNS 9757396</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Kirsty Wilman</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£40,000</td>
+        <td class="num">24,390</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Henry Franklin</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£40,000</td>
+        <td class="num">24,390</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Golden Prospect Precious Metals Ltd.</div><div class="tk">LSE: GPM</div></td>
+        <td><div class="who">Christopher Waldron</div><div class="role">Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£35,325</td>
+        <td class="num">30,000</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/golden-prospect-precious-metals-ltd---gpm/director-pdmr-shareholding/9738924" target="_blank" rel="noopener">RNS 9738924</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Barratt Redrow</div><div class="tk">LSE: BTRW</div></td>
+        <td><div class="who">Katie Bickerstaffe</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">06 Mar 2026</td>
+        <td class="num val">£34,769</td>
+        <td class="num">10,771</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/barratt-redrow--btrw/director-pdmr-shareholding/9739637" target="_blank" rel="noopener">RNS 9739637</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Trekor Metals Limited</div><div class="tk">LSE: TKO</div></td>
+        <td><div class="who">Bryce Hamming</div><div class="role">Executive</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">34,137</td>
+        <td class="num">25,000</td>
+        <td class="why">role is not CFO: &#x27;Executive&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/trekor-metals-limited--tko/director-pdmr-shareholding/9742155" target="_blank" rel="noopener">RNS 9742155</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Dan Mobley</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£32,955</td>
+        <td class="num">1,971</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Ewan Andrew</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£32,604</td>
+        <td class="num">1,950</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759696" target="_blank" rel="noopener">RNS 9759696</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Alvaro Cardenas</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">$31,353</td>
+        <td class="num">470</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759695" target="_blank" rel="noopener">RNS 9759695</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Hunting</div><div class="tk">LSE: HTG</div></td>
+        <td><div class="who">Paula Harris</div><div class="role">Non-executive Director</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£28,616</td>
+        <td class="num">7,300</td>
+        <td class="why">role is not CFO: &#x27;Non-executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hunting--htg/director-pdmr-shareholding/9741923" target="_blank" rel="noopener">RNS 9741923</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">GCM Resources</div><div class="tk">LSE: GCM</div></td>
+        <td><div class="who">Keith Fulton</div><div class="role">Finance Director</div></td>
+        <td class="dt">27 Aug 2026</td>
+        <td class="num val">£24,911</td>
+        <td class="num">144,368</td>
+        <td class="why">disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/gcm-resources--gcm/director-pdmr-shareholding/9743756" target="_blank" rel="noopener">RNS 9743756</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Alvaro Cardenas</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">$20,760</td>
+        <td class="num">310</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759695" target="_blank" rel="noopener">RNS 9759695</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Karen Whitworth</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£16,400</td>
+        <td class="num">10,000</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Alastair Hughes</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£14,999</td>
+        <td class="num">9,146</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Susan Laing</div><div class="role">PCA of PDMR (Richard Laing)</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£13,120</td>
+        <td class="num">8,000</td>
+        <td class="why">person closely associated, not a CFO; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Bjorn Hobart</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£12,000</td>
+        <td class="num">7,317</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Martine Whitehead</div><div class="role">PCA of PDMR (Frankie Whitehead)</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£12,000</td>
+        <td class="num">7,317</td>
+        <td class="why">person closely associated, not a CFO; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Latham (James)</div><div class="tk">LSE: LTHM</div></td>
+        <td><div class="who">Nick Latham</div><div class="role">Chairman</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£11,981</td>
+        <td class="num">1,125</td>
+        <td class="why">role is not CFO: &#x27;Chairman&#x27;; unrecognised transaction type: &#x27;Issue of Ordinary Shares under the Company SIPS scheme&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/latham-james---lthm/pdmr-dealings-/9756856" target="_blank" rel="noopener">RNS 9756856</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">British American Tobacco</div><div class="tk">LSE: BATS</div></td>
+        <td><div class="who">Tadeu Marroco</div><div class="role">Chief Executive</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£10,723</td>
+        <td class="num">250</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/british-american-tobacco--bats/director-pdmr-shareholding/9741714" target="_blank" rel="noopener">RNS 9741714</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">British American Tobacco</div><div class="tk">LSE: BATS</div></td>
+        <td><div class="who">Luciana Franco Do Amaral</div><div class="role">Person Closely Associated with a person discharging managerial responsibilities; Tadeu Marroco, Chief Executive.</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£10,723</td>
+        <td class="num">250</td>
+        <td class="why">person closely associated, not a CFO; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/british-american-tobacco--bats/director-pdmr-shareholding/9741714" target="_blank" rel="noopener">RNS 9741714</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Latham (James)</div><div class="tk">LSE: LTHM</div></td>
+        <td><div class="who">David Dunmow</div><div class="role">Finance Director</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£10,671</td>
+        <td class="num">1,002</td>
+        <td class="why">unrecognised transaction type: &#x27;Issue of Ordinary Shares under the Company SIPS scheme&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/latham-james---lthm/pdmr-dealings-/9756856" target="_blank" rel="noopener">RNS 9756856</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Wu Gang</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£10,001</td>
+        <td class="num">6,098</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Crimson Tide</div><div class="tk">LSE: TIDE</div></td>
+        <td><div class="who">James Joyce</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£10,000</td>
+        <td class="num">11,435</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/crimson-tide--tide/director-pdmr-shareholding-/9738513" target="_blank" rel="noopener">RNS 9738513</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Charlie Withers</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£9,840</td>
+        <td class="num">6,000</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Bunzl</div><div class="tk">LSE: BNZL</div></td>
+        <td><div class="who">Frank van Zanten</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£9,796</td>
+        <td class="num">368</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; SAYE/sharesave scheme</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bunzl--bnzl/director-pdmr-shareholding/9759718" target="_blank" rel="noopener">RNS 9759718</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Paul Walker</div><div class="role">Director</div></td>
+        <td class="dt">31 Aug 2026 +</td>
+        <td class="num val">$8,654</td>
+        <td class="num">162</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; restricted stock units</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Roy Twite</div><div class="role">Director</div></td>
+        <td class="dt">31 Aug 2026 +</td>
+        <td class="num val">$7,533</td>
+        <td class="num">141</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; restricted stock units</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Jill Easterbrook</div><div class="role">Director</div></td>
+        <td class="dt">31 Aug 2026 +</td>
+        <td class="num val">$6,464</td>
+        <td class="num">121</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; restricted stock units</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Diageo</div><div class="tk">LSE: DGE</div></td>
+        <td><div class="who">Hannah Brooks</div><div class="role">Member of the Executive Committee</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">$6,137</td>
+        <td class="num">92</td>
+        <td class="why">role is not CFO: &#x27;Member of the Executive Committee&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/diageo--dge/director-pdmr-shareholding/9759695" target="_blank" rel="noopener">RNS 9759695</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Angus Cockburn</div><div class="role">Director</div></td>
+        <td class="dt">31 Aug 2026 +</td>
+        <td class="num val">$5,770</td>
+        <td class="num">108</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; restricted stock units</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ninety One</div><div class="tk">LSE: N91</div></td>
+        <td><div class="who">Forty Two Point Two</div><div class="role">In terms of UK MAR, the Listing Rules, and the Disclosure Guidance and Transparency Rules of the FCA, this notification concerns a person closely associated with Hendrik du Toit and Kim McFarland, each of whom is a Director of Ninety One plc (i.e. a PDMR). In terms of the JSE Listings Requirements, Forty Two Point Two is wholly owned by the Marathon Trust and the undermentioned persons (who are directors of Ninety One plc, Ninety One Limited and/or major subsidiaries of Ninety One) are beneficiaries of the Marathon Trust. Forty Two Point Two is an associate of these persons for the purpose of the JSE Listings Requirements:- · Hendrik du Toit - Director of Ninety One plc and Ninety One Limited · Kim McFarland - Director of Ninety One plc,  Ninety One Limited and Ninety One Assurance Limited · Johan Schreuder - Director of Ninety One Assurance  Limited and Ninety One Guernsey Limited · Adam Fletcher - Director of Ninety One Guernsey Limited · Malcolm Gray - Director of Ninety One Assurance Limited</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£5,583</td>
+        <td class="num">2,674</td>
+        <td class="why">person closely associated, not a CFO</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ninety-one--n91/director-pdmr-shareholding/9759275" target="_blank" rel="noopener">RNS 9759275</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Duncan Brown</div><div class="role">PCA of PDMR (Elizabath Brown)</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£5,000</td>
+        <td class="num">3,049</td>
+        <td class="why">person closely associated, not a CFO; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tritax Big Box Reit</div><div class="tk">LSE: BBOX</div></td>
+        <td><div class="who">Petrina Porter (née Austin)</div><div class="role">PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£5,000</td>
+        <td class="num">3,049</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tritax-big-box-reit--bbox/pdmr-subscription-for-ordinary-shares/9740935" target="_blank" rel="noopener">RNS 9740935</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sequoia Economic Infrastructure Income Fund Limited</div><div class="tk">LSE: SEQI</div></td>
+        <td><div class="who">Iryna Yakymets</div><div class="role">PCA of the Chief Risk Officer of the Investment Adviser to the Company</div></td>
+        <td class="dt">07 Aug 2026</td>
+        <td class="num val">£4,999</td>
+        <td class="num">5,780</td>
+        <td class="why">person closely associated, not a CFO</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/sequoia-economic-infrastructure-income-fund-limited--seqi/pdmr-pca-shareholding/9737488" target="_blank" rel="noopener">RNS 9737488</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Keenan Austin</div><div class="role">Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$4,787</td>
+        <td class="num">580</td>
+        <td class="why">role is not CFO: &#x27;Executive Director&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Roeland Smits</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$4,160</td>
+        <td class="num">504</td>
+        <td class="why">disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Thomas Gensemer</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$4,160</td>
+        <td class="num">504</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Neal Strum</div><div class="role">Chief Legal Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$4,020</td>
+        <td class="num">487</td>
+        <td class="why">role is not CFO: &#x27;Chief Legal Officer&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Keenan Austin</div><div class="role">Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,729</td>
+        <td class="num">460</td>
+        <td class="why">role is not CFO: &#x27;Executive Director&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Keenan Austin</div><div class="role">Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,628</td>
+        <td class="num">460</td>
+        <td class="why">role is not CFO: &#x27;Executive Director&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Softcat</div><div class="tk">LSE: SCT</div></td>
+        <td><div class="who">Graham Charlton</div><div class="role">CEO</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£3,600</td>
+        <td class="num">176</td>
+        <td class="why">role is not CFO: &#x27;CEO&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/softcat--sct/director-pdmr-shareholding/9761564" target="_blank" rel="noopener">RNS 9761564</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Softcat</div><div class="tk">LSE: SCT</div></td>
+        <td><div class="who">Katy Mecklenburgh</div><div class="role">CFO</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£3,600</td>
+        <td class="num">176</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/softcat--sct/director-pdmr-shareholding/9761564" target="_blank" rel="noopener">RNS 9761564</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Keenan Austin</div><div class="role">Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,572</td>
+        <td class="num">461</td>
+        <td class="why">role is not CFO: &#x27;Executive Director&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Ron Starzman</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,508</td>
+        <td class="num">425</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Roeland Smits</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,308</td>
+        <td class="num">408</td>
+        <td class="why">disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Thomas Gensemer</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,308</td>
+        <td class="num">408</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Roeland Smits</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,210</td>
+        <td class="num">407</td>
+        <td class="why">disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Thomas Gensemer</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,210</td>
+        <td class="num">407</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Roeland Smits</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,153</td>
+        <td class="num">407</td>
+        <td class="why">disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Thomas Gensemer</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,153</td>
+        <td class="num">407</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Neal Strum</div><div class="role">Chief Legal Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,121</td>
+        <td class="num">385</td>
+        <td class="why">role is not CFO: &#x27;Chief Legal Officer&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Neal Strum</div><div class="role">Chief Legal Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$3,037</td>
+        <td class="num">385</td>
+        <td class="why">role is not CFO: &#x27;Chief Legal Officer&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Neal Strum</div><div class="role">Chief Legal Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$2,991</td>
+        <td class="num">386</td>
+        <td class="why">role is not CFO: &#x27;Chief Legal Officer&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Ron Starzman</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$2,748</td>
+        <td class="num">339</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">PZ Cussons</div><div class="tk">LSE: PZC</div></td>
+        <td><div class="who">David Tyler</div><div class="role">Non-Executive Chair</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£2,722</td>
+        <td class="num">2,602</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Chair&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pz-cussons--pzc/director-pdmr-shareholding/9738760" target="_blank" rel="noopener">RNS 9738760</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Ron Starzman</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$2,689</td>
+        <td class="num">341</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Ron Starzman</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$2,626</td>
+        <td class="num">339</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">PZ Cussons</div><div class="tk">LSE: PZC</div></td>
+        <td><div class="who">Vivek Ahuja</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£2,623</td>
+        <td class="num">2,508</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pz-cussons--pzc/director-pdmr-shareholding/9738760" target="_blank" rel="noopener">RNS 9738760</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">PZ Cussons</div><div class="tk">LSE: PZC</div></td>
+        <td><div class="who">Kirsty Bashforth</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£2,623</td>
+        <td class="num">2,508</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pz-cussons--pzc/director-pdmr-shareholding/9738760" target="_blank" rel="noopener">RNS 9738760</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">PZ Cussons</div><div class="tk">LSE: PZC</div></td>
+        <td><div class="who">Jitesh Sodha</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£2,623</td>
+        <td class="num">2,508</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pz-cussons--pzc/director-pdmr-shareholding/9738760" target="_blank" rel="noopener">RNS 9738760</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">PZ Cussons</div><div class="tk">LSE: PZC</div></td>
+        <td><div class="who">Valeria Juarez</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£2,623</td>
+        <td class="num">2,508</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pz-cussons--pzc/director-pdmr-shareholding/9738760" target="_blank" rel="noopener">RNS 9738760</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ultimate Products</div><div class="tk">LSE: ULTP</div></td>
+        <td><div class="who">Chris Dent</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£2,608</td>
+        <td class="num">4,875</td>
+        <td class="why">disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ultimate-products--ultp/ebt-share-sale-and-director-pdmr-shareholding/9742158" target="_blank" rel="noopener">RNS 9742158</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">International Biotech Trust</div><div class="tk">LSE: IBT</div></td>
+        <td><div class="who">Kate Cornish-Bowden</div><div class="role">Director</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£2,593</td>
+        <td class="num">233</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/international-biotech-trust--ibt/director-pdmr-shareholding/9741980" target="_blank" rel="noopener">RNS 9741980</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ultimate Products</div><div class="tk">LSE: ULTP</div></td>
+        <td><div class="who">Chris Dent</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£2,574</td>
+        <td class="num">4,875</td>
+        <td class="why">disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ultimate-products--ultp/ebt-share-sale-and-director-pdmr-shareholding/9742158" target="_blank" rel="noopener">RNS 9742158</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Centrica</div><div class="tk">LSE: CNA</div></td>
+        <td><div class="who">Frank Mastiaux</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£2,247</td>
+        <td class="num">1,448</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/centrica--cna/director-pdmr-shareholding/9739107" target="_blank" rel="noopener">RNS 9739107</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Currys</div><div class="tk">LSE: CURY</div></td>
+        <td><div class="who">Elaine Bucknor</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">28 Aug 2026</td>
+        <td class="num val">£1,522</td>
+        <td class="num">1,000</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/currys--cury/director-pdmr-shareholding/9758807" target="_blank" rel="noopener">RNS 9758807</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">JPMorgan Asia Growth &amp; Income</div><div class="tk">LSE: JAGI</div></td>
+        <td><div class="who">JUNE AITKEN</div><div class="role">DIRECTOR</div></td>
+        <td class="dt">25 Aug 2026 (filed)</td>
+        <td class="num val">£1,181</td>
+        <td class="num">205</td>
+        <td class="why">role is not CFO: &#x27;DIRECTOR&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/jpmorgan-asia-growth-income--jagi/director-pdmr-shareholding/9739545" target="_blank" rel="noopener">RNS 9739545</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">International Biotech Trust</div><div class="tk">LSE: IBT</div></td>
+        <td><div class="who">Alexa Henderson</div><div class="role">Director</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£1,126</td>
+        <td class="num">101</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/international-biotech-trust--ibt/director-pdmr-shareholding/9741982" target="_blank" rel="noopener">RNS 9741982</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Centrica</div><div class="tk">LSE: CNA</div></td>
+        <td><div class="who">Sue Whalley</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£976</td>
+        <td class="num">629</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/centrica--cna/director-pdmr-shareholding/9739107" target="_blank" rel="noopener">RNS 9739107</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tracsis</div><div class="tk">LSE: TRCS</div></td>
+        <td><div class="who">David Frost</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£652</td>
+        <td class="num">163,051</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tracsis--trcs/award-of-options-/9742150" target="_blank" rel="noopener">RNS 9742150</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Keenan Austin</div><div class="role">Executive Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$595</td>
+        <td class="num">72</td>
+        <td class="why">role is not CFO: &#x27;Executive Director&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Roeland Smits</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$587</td>
+        <td class="num">71</td>
+        <td class="why">disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Thomas Gensemer</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$587</td>
+        <td class="num">71</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Neal Strum</div><div class="role">Chief Legal Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$488</td>
+        <td class="num">59</td>
+        <td class="why">role is not CFO: &#x27;Chief Legal Officer&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Public Policy Holding Company, Inc. (DI) (REG S, CAT3)</div><div class="tk">LSE: PPHC</div></td>
+        <td><div class="who">Ron Starzman</div><div class="role">PDMR</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$463</td>
+        <td class="num">56</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; award/grant, no cash consideration</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/public-policy-holding-company-inc-di-reg-s-cat3---pphc/pdmr-dealings-/9739764" target="_blank" rel="noopener">RNS 9739764</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Mitie Group</div><div class="tk">LSE: MTO</div></td>
+        <td><div class="who">PHIL BENTLEY</div><div class="role">PDMR - CHIEF EXECUTIVE</div></td>
+        <td class="dt">27 Aug 2026</td>
+        <td class="num val">£418</td>
+        <td class="num">200</td>
+        <td class="why">role is not CFO: &#x27;PDMR - CHIEF EXECUTIVE&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/mitie-group--mto/director-pdmr-shareholding/9759616" target="_blank" rel="noopener">RNS 9759616</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tracsis</div><div class="tk">LSE: TRCS</div></td>
+        <td><div class="who">And y Kelly</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£415</td>
+        <td class="num">103,729</td>
+        <td class="why">long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tracsis--trcs/award-of-options-/9742150" target="_blank" rel="noopener">RNS 9742150</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">GSK</div><div class="tk">LSE: GSK</div></td>
+        <td><div class="who">Maya Martinez-Davis</div><div class="role">President, US</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">$342</td>
+        <td class="num">9</td>
+        <td class="why">role is not CFO: &#x27;President, US&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/gsk--gsk/director-pdmr-shareholding/9741900" target="_blank" rel="noopener">RNS 9741900</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ninety One</div><div class="tk">LSE: N91</div></td>
+        <td><div class="who">Hendrik du Toit</div><div class="role">Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£311</td>
+        <td class="num">142</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ninety-one--n91/director-pdmr-shareholding/9738761" target="_blank" rel="noopener">RNS 9738761</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">CMC Markets</div><div class="tk">LSE: CMCX</div></td>
+        <td><div class="who">Jonathan Bendall</div><div class="role">Chief Operating Officer</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£306</td>
+        <td class="num">40</td>
+        <td class="why">role is not CFO: &#x27;Chief Operating Officer&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cmc-markets--cmcx/director-pdmr-shareholding/9761487" target="_blank" rel="noopener">RNS 9761487</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">IntegraFin Holding</div><div class="tk">LSE: IHP</div></td>
+        <td><div class="who">Alexander Scott</div><div class="role">CEO</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£302</td>
+        <td class="num">78</td>
+        <td class="why">role is not CFO: &#x27;CEO&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/integrafin-holding--ihp/director-pdmr-shareholding/9737100" target="_blank" rel="noopener">RNS 9737100</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">IntegraFin Holding</div><div class="tk">LSE: IHP</div></td>
+        <td><div class="who">Thomas Dunbar</div><div class="role">Executive Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£302</td>
+        <td class="num">78</td>
+        <td class="why">role is not CFO: &#x27;Executive Director&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/integrafin-holding--ihp/director-pdmr-shareholding/9737100" target="_blank" rel="noopener">RNS 9737100</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">IntegraFin Holding</div><div class="tk">LSE: IHP</div></td>
+        <td><div class="who">Euan Marshall</div><div class="role">CFO</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£294</td>
+        <td class="num">76</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/integrafin-holding--ihp/director-pdmr-shareholding/9737100" target="_blank" rel="noopener">RNS 9737100</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Alliance Witan</div><div class="tk">LSE: ALW</div></td>
+        <td><div class="who">Rachel Beagles</div><div class="role">Director</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£291</td>
+        <td class="num">2,128</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/alliance-witan--alw/director-pdmr-shareholding/9759623" target="_blank" rel="noopener">RNS 9759623</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Alliance Witan</div><div class="tk">LSE: ALW</div></td>
+        <td><div class="who">Rachel Beagles</div><div class="role">Director</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£291</td>
+        <td class="num">2,128</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/alliance-witan--alw/director-pdmr-shareholding/9759623" target="_blank" rel="noopener">RNS 9759623</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">CMC Markets</div><div class="tk">LSE: CMCX</div></td>
+        <td><div class="who">David John Fineberg</div><div class="role">Head of Global Strategic Partnerships</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£290</td>
+        <td class="num">38</td>
+        <td class="why">role is not CFO: &#x27;Head of Global Strategic Partnerships&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cmc-markets--cmcx/director-pdmr-shareholding/9761487" target="_blank" rel="noopener">RNS 9761487</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Mondi</div><div class="tk">LSE: MNDI</div></td>
+        <td><div class="who">Andrew King</div><div class="role">Group CEO</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£287</td>
+        <td class="num">34</td>
+        <td class="why">role is not CFO: &#x27;Group CEO&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/mondi--mndi/director-pdmr-shareholding/9761314" target="_blank" rel="noopener">RNS 9761314</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Mondi</div><div class="tk">LSE: MNDI</div></td>
+        <td><div class="who">Mike Powell</div><div class="role">Group CFO</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£287</td>
+        <td class="num">34</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/mondi--mndi/director-pdmr-shareholding/9761314" target="_blank" rel="noopener">RNS 9761314</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tracsis</div><div class="tk">LSE: TRCS</div></td>
+        <td><div class="who">Joe Eldridge</div><div class="role">Chief Technology and Operations Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£184</td>
+        <td class="num">46,024</td>
+        <td class="why">role is not CFO: &#x27;Chief Technology and Operations Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tracsis--trcs/award-of-options-/9742150" target="_blank" rel="noopener">RNS 9742150</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tracsis</div><div class="tk">LSE: TRCS</div></td>
+        <td><div class="who">Claire Jones</div><div class="role">Chief People Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£180</td>
+        <td class="num">45,085</td>
+        <td class="why">role is not CFO: &#x27;Chief People Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tracsis--trcs/award-of-options-/9742150" target="_blank" rel="noopener">RNS 9742150</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tracsis</div><div class="tk">LSE: TRCS</div></td>
+        <td><div class="who">Simon Critchley</div><div class="role">Chief Commercial Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£180</td>
+        <td class="num">45,085</td>
+        <td class="why">role is not CFO: &#x27;Chief Commercial Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tracsis--trcs/award-of-options-/9742150" target="_blank" rel="noopener">RNS 9742150</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cranswick</div><div class="tk">LSE: CWK</div></td>
+        <td><div class="who">Christopher Aldersley</div><div class="role">Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£160</td>
+        <td class="num">3</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cranswick--cwk/director-pdmr-shareholding/9738749" target="_blank" rel="noopener">RNS 9738749</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">IntegraFin Holding</div><div class="tk">LSE: IHP</div></td>
+        <td><div class="who">Alexander Scott</div><div class="role">CEO</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£151</td>
+        <td class="num">39</td>
+        <td class="why">role is not CFO: &#x27;CEO&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/integrafin-holding--ihp/director-pdmr-shareholding/9737100" target="_blank" rel="noopener">RNS 9737100</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">IntegraFin Holding</div><div class="tk">LSE: IHP</div></td>
+        <td><div class="who">Thomas Dunbar</div><div class="role">Executive Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£151</td>
+        <td class="num">39</td>
+        <td class="why">role is not CFO: &#x27;Executive Director&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/integrafin-holding--ihp/director-pdmr-shareholding/9737100" target="_blank" rel="noopener">RNS 9737100</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Moneysupermarket.com Group</div><div class="tk">LSE: MONY</div></td>
+        <td><div class="who">Peter Duffy</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£151</td>
+        <td class="num">75</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/moneysupermarket-com-group--mony/director-pdmr-shareholding/9759256" target="_blank" rel="noopener">RNS 9759256</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">National Grid</div><div class="tk">LSE: NG.</div></td>
+        <td><div class="who">Andy Agg</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">08 Sep 2026 (filed)</td>
+        <td class="num val">£151</td>
+        <td class="num">13</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/national-grid--ng./director-pdmr-shareholding/9761546" target="_blank" rel="noopener">RNS 9761546</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ondo Insurtech</div><div class="tk">LSE: ONDO</div></td>
+        <td><div class="who">Craig Foster</div><div class="role">Chief Executive Officer and PDMR</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">£150</td>
+        <td class="num">2,308</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer and PDMR&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ondo-insurtech--ondo/director-pdmr-shareholding/9757399" target="_blank" rel="noopener">RNS 9757399</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">SSP Group</div><div class="tk">LSE: SSPG</div></td>
+        <td><div class="who">Kari Daniels</div><div class="role">CEO - UK &amp; Ireland</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£150</td>
+        <td class="num">76</td>
+        <td class="why">role is not CFO: &#x27;CEO - UK &amp; Ireland&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ssp-group--sspg/director-pdmr-shareholding/9761427" target="_blank" rel="noopener">RNS 9761427</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Rathbones Group</div><div class="tk">LSE: RAT</div></td>
+        <td><div class="who">Jonathan Sorrell</div><div class="role">Group Chief Executive Officer</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£150</td>
+        <td class="num">9</td>
+        <td class="why">role is not CFO: &#x27;Group Chief Executive Officer&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/rathbones-group--rat/director-pdmr-shareholding/9759146" target="_blank" rel="noopener">RNS 9759146</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Rathbones Group</div><div class="tk">LSE: RAT</div></td>
+        <td><div class="who">Iain Hooley</div><div class="role">Group Chief Financial Officer</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£150</td>
+        <td class="num">9</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/rathbones-group--rat/director-pdmr-shareholding/9759146" target="_blank" rel="noopener">RNS 9759146</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Pollen Street</div><div class="tk">LSE: POLN</div></td>
+        <td><div class="who">Crispin Goldsmith</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£149</td>
+        <td class="num">17</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pollen-street--poln/director-pdmr-shareholding/9741821" target="_blank" rel="noopener">RNS 9741821</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Moneysupermarket.com Group</div><div class="tk">LSE: MONY</div></td>
+        <td><div class="who">Matthew Cresswell</div><div class="role">PDMR</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£149</td>
+        <td class="num">74</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/moneysupermarket-com-group--mony/director-pdmr-shareholding/9759256" target="_blank" rel="noopener">RNS 9759256</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">IntegraFin Holding</div><div class="tk">LSE: IHP</div></td>
+        <td><div class="who">Euan Marshall</div><div class="role">CFO</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£147</td>
+        <td class="num">38</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/integrafin-holding--ihp/director-pdmr-shareholding/9737100" target="_blank" rel="noopener">RNS 9737100</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Barr (A.G.)</div><div class="tk">LSE: BAG</div></td>
+        <td><div class="who">Euan Sutherland (Chief Executive Officer) Stuart Lorimer (Chief Finance &amp; Operating Officer) Julie Barr (Chief Legal &amp; Sustainability Officer) Alison Gowen (Chief People Officer) Karl Donnan (Chief Supply Chain Officer)</div><div class="role">As per 1(a)</div></td>
+        <td class="dt">07 Sep 2026</td>
+        <td class="num val">£145</td>
+        <td class="num">24</td>
+        <td class="why">role is not CFO: &#x27;As per 1(a)&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/barr-a-g---bag/director-pdmr-shareholding/9761224" target="_blank" rel="noopener">RNS 9761224</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tracsis</div><div class="tk">LSE: TRCS</div></td>
+        <td><div class="who">Mark Robinson</div><div class="role">Group Finance Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£142</td>
+        <td class="num">35,593</td>
+        <td class="why">long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tracsis--trcs/award-of-options-/9742150" target="_blank" rel="noopener">RNS 9742150</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ninety One</div><div class="tk">LSE: N91</div></td>
+        <td><div class="who">Deepshika Hariprasad</div><div class="role">Director of a major subsidiary of the Company</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£140</td>
+        <td class="num">64</td>
+        <td class="why">role is not CFO: &#x27;Director of a major subsidiary of the Company&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ninety-one--n91/director-pdmr-shareholding/9738761" target="_blank" rel="noopener">RNS 9738761</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ninety One</div><div class="tk">LSE: N91</div></td>
+        <td><div class="who">Kim McFarland</div><div class="role">Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£136</td>
+        <td class="num">62</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ninety-one--n91/director-pdmr-shareholding/9738761" target="_blank" rel="noopener">RNS 9738761</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ondo Insurtech</div><div class="tk">LSE: ONDO</div></td>
+        <td><div class="who">Kevin Withington</div><div class="role">Chief Financial Officer and PDMR</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">£132</td>
+        <td class="num">2,038</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ondo-insurtech--ondo/director-pdmr-shareholding/9757399" target="_blank" rel="noopener">RNS 9757399</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">PayPoint</div><div class="tk">LSE: PAY</div></td>
+        <td><div class="who">Julian Coghlan Simon Coles Ben Ford David Robert Harding Samantha Holden Mark Latham Tanya Murphy Stephen O’Neill Christopher Paul Anthony Sappor Josephine Toolan Katy Wilde Nicholas Wiles</div><div class="role">PDMR PDMR PDMR Chief Financial Officer PDMR PDMR PDMR PDMR PDMR PDMR PDMR PDMR Chief Executive Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£124</td>
+        <td class="num">20</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/gnw/paypoint--pay/paypoint-plc-director-pdmr-shareholding/9740943" target="_blank" rel="noopener">RNS 9740943</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">PayPoint</div><div class="tk">LSE: PAY</div></td>
+        <td><div class="who">Julian Coghlan Simon Coles Ben Ford David Robert Harding Samantha Holden Mark Latham Tanya Murphy Stephen O’Neill Christopher Paul Anthony Sappor Josephine Toolan Katy Wilde Nicholas Wiles</div><div class="role">PDMR PDMR PDMR Chief Financial Officer PDMR PDMR PDMR PDMR PDMR PDMR PDMR PDMR Chief Executive Officer</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£124</td>
+        <td class="num">20</td>
+        <td class="why">Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/gnw/paypoint--pay/paypoint-plc-director-pdmr-shareholding/9740943" target="_blank" rel="noopener">RNS 9740943</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Moneysupermarket.com Group</div><div class="tk">LSE: MONY</div></td>
+        <td><div class="who">Matthew Whittle</div><div class="role">PDMR</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£98.59</td>
+        <td class="num">49</td>
+        <td class="why">role is not CFO: &#x27;PDMR&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/moneysupermarket-com-group--mony/director-pdmr-shareholding/9759256" target="_blank" rel="noopener">RNS 9759256</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ninety One</div><div class="tk">LSE: N91</div></td>
+        <td><div class="who">Amina Rasool</div><div class="role">Company Secretary</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£67.83</td>
+        <td class="num">31</td>
+        <td class="why">role is not CFO: &#x27;Company Secretary&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ninety-one--n91/director-pdmr-shareholding/9738761" target="_blank" rel="noopener">RNS 9738761</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tharisa (DI)</div><div class="tk">LSE: THS</div></td>
+        <td><div class="who">Sanet Findlay</div><div class="role">Group Company Secretary</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">47.79</td>
+        <td class="num">40</td>
+        <td class="why">role is not CFO: &#x27;Group Company Secretary&#x27;; disposal, not a purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tharisa-di---ths/director-pdmr-shareholding/9741215" target="_blank" rel="noopener">RNS 9741215</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Latham (James)</div><div class="tk">LSE: LTHM</div></td>
+        <td><div class="who">Piers Latham</div><div class="role">Executive Director</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£42.60</td>
+        <td class="num">4</td>
+        <td class="why">role is not CFO: &#x27;Executive Director&#x27;; unrecognised transaction type: &#x27;Issue of Ordinary Shares under the Company SIPS scheme&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/latham-james---lthm/pdmr-dealings-/9756856" target="_blank" rel="noopener">RNS 9756856</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Record</div><div class="tk">LSE: REC</div></td>
+        <td><div class="who">THOMAS ARNOLD</div><div class="role">HEAD OF CLIENT TEAM</div></td>
+        <td class="dt">27 Aug 2026</td>
+        <td class="num val">£0.44</td>
+        <td class="num">1</td>
+        <td class="why">role is not CFO: &#x27;HEAD OF CLIENT TEAM&#x27;; Share Incentive Plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/record--rec/director-pdmr-shareholding/9756647" target="_blank" rel="noopener">RNS 9756647</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Tungsten West</div><div class="tk">LSE: TUN</div></td>
+        <td><div class="who">Ronald Day</div><div class="role">Chief Operating Officer</div></td>
+        <td class="dt">23 Aug 2026</td>
+        <td class="num val">£0.01</td>
+        <td class="num">1</td>
+        <td class="why">role is not CFO: &#x27;Chief Operating Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/tungsten-west--tun/grant-of-awards-under-long-term-incentive-plan/9738670" target="_blank" rel="noopener">RNS 9738670</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Dimitri Goulandris</div><div class="role">Chairman</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">role is not CFO: &#x27;Chairman&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Todd Shriber</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Rupert Dorey</div><div class="role">Non-executive Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">role is not CFO: &#x27;Non-executive Director&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Rosemary Dorey</div><div class="role">Person closely associated with a director of the Company, being Rupert Dorey</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">person closely associated, not a CFO; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Richard Boléat</div><div class="role">Non-executive Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">role is not CFO: &#x27;Non-executive Director&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Gatemore Special Opportunities Master Fund Ltd</div><div class="role">Person closely associated with a director of the Company, being Liad Meidar</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">person closely associated, not a CFO; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Josh Targoff</div><div class="role">Non-executive Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">role is not CFO: &#x27;Non-executive Director&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Luana Majdalani</div><div class="role">Non-executive Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">role is not CFO: &#x27;Non-executive Director&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Malibu Life Holdings Limited</div><div class="tk">LSE: MLHL</div></td>
+        <td><div class="who">Robert Hou</div><div class="role">Head of Reinsurance</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">$203</td>
+        <td class="num">14</td>
+        <td class="why">role is not CFO: &#x27;Head of Reinsurance&#x27;; placing/subscription, not open-market</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/malibu-life-holdings-limited--mlhl/announcement-of-transactions-by-pdmrs-pcas/9737111" target="_blank" rel="noopener">RNS 9737111</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Wizz Air Holdings</div><div class="tk">LSE: WIZZ</div></td>
+        <td><div class="who">Brian Franke</div><div class="role">Principal</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">33,000</td>
+        <td class="why">role is not CFO: &#x27;Principal&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/wizz-air-holdings--wizz/director-pdmr-shareholding/9737095" target="_blank" rel="noopener">RNS 9737095</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Pinewood Technologies Group</div><div class="tk">LSE: PINE</div></td>
+        <td><div class="who">Bill Berman</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">65,672</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pinewood-technologies-group--pine/notification-and-public-disclosure-of-transactions/9743377" target="_blank" rel="noopener">RNS 9743377</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Pinewood Technologies Group</div><div class="tk">LSE: PINE</div></td>
+        <td><div class="who">Ollie Mann</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">27,733</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pinewood-technologies-group--pine/notification-and-public-disclosure-of-transactions/9743377" target="_blank" rel="noopener">RNS 9743377</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cropper (James)</div><div class="tk">LSE: CRPR</div></td>
+        <td><div class="who">David Stirling</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">121,181</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cropper-james---crpr/grant-of-awards-under-long-term-incentive-plan-/9743243" target="_blank" rel="noopener">RNS 9743243</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cropper (James)</div><div class="tk">LSE: CRPR</div></td>
+        <td><div class="who">Andrew Goody</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">21,900</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cropper-james---crpr/grant-of-awards-under-long-term-incentive-plan-/9743243" target="_blank" rel="noopener">RNS 9743243</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cropper (James)</div><div class="tk">LSE: CRPR</div></td>
+        <td><div class="who">Paul Barber</div><div class="role">Managing Director, Paper &amp; Packaging</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">21,425</td>
+        <td class="why">role is not CFO: &#x27;Managing Director, Paper &amp; Packaging&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cropper-james---crpr/grant-of-awards-under-long-term-incentive-plan-/9743243" target="_blank" rel="noopener">RNS 9743243</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cropper (James)</div><div class="tk">LSE: CRPR</div></td>
+        <td><div class="who">Matt Ratcliffe</div><div class="role">General Counsel and Company Secretary</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">10,799</td>
+        <td class="why">role is not CFO: &#x27;General Counsel and Company Secretary&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cropper-james---crpr/grant-of-awards-under-long-term-incentive-plan-/9743243" target="_blank" rel="noopener">RNS 9743243</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Plus500 Ltd (DI)</div><div class="tk">LSE: PLUS</div></td>
+        <td><div class="who">David Zruia</div><div class="role">Group CEO/PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">0.00</td>
+        <td class="num">637,237</td>
+        <td class="why">role is not CFO: &#x27;Group CEO/PDMR&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/plus500-ltd-di---plus/director-pdmr-dealing-and-total-voting-rights/9742151" target="_blank" rel="noopener">RNS 9742151</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Plus500 Ltd (DI)</div><div class="tk">LSE: PLUS</div></td>
+        <td><div class="who">To be held by a trustee for David Zruia</div><div class="role">Group CEO/PDMR</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">0.00</td>
+        <td class="num">729,869</td>
+        <td class="why">person closely associated, not a CFO; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/plus500-ltd-di---plus/director-pdmr-dealing-and-total-voting-rights/9742151" target="_blank" rel="noopener">RNS 9742151</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cropper (James)</div><div class="tk">LSE: CRPR</div></td>
+        <td><div class="who">1.   Martin Court and Lyndsey Scott as directors of James Cropper EBT Limited, trustee of James Cropper Employee Trust</div><div class="role">1.   Non-Executive Directors of the Company</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">81,751</td>
+        <td class="why">role is not CFO: &#x27;1.   Non-Executive Directors of the Company&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cropper-james---crpr/new-employee-benefit-trust-and-pdmr-dealing/9741947" target="_blank" rel="noopener">RNS 9741947</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Pollen Street</div><div class="tk">LSE: POLN</div></td>
+        <td><div class="who">Crispin Goldsmith</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">17</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/pollen-street--poln/director-pdmr-shareholding/9741821" target="_blank" rel="noopener">RNS 9741821</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Morgan Sindall Group</div><div class="tk">LSE: MGNS</div></td>
+        <td><div class="who">Mrs Rosalind Morgan</div><div class="role">Person closely associated with a person discharging managerial responsibilities, John Morgan, Chief Executive</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">3,004</td>
+        <td class="why">person closely associated, not a CFO; transfer/gift, not a market purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/morgan-sindall-group--mgns/director-pdmr-shareholding/9741752" target="_blank" rel="noopener">RNS 9741752</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">B&amp;M European Value Retail S.A. (DI)</div><div class="tk">LSE: BME</div></td>
+        <td><div class="who">Anthony Giron</div><div class="role">Anthony Giron is a person discharging managerial responsibilities in relation to the Issuer&#x27;s Group, being the Managing Director of B&amp;M France.</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">31,547</td>
+        <td class="why">role is not CFO: &#x27;Anthony Giron is a person discharging managerial responsibilities in relation to&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/b-m-european-value-retail-s-a-di---bme/director-pdmr-shareholding/9741675" target="_blank" rel="noopener">RNS 9741675</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">B&amp;M European Value Retail S.A. (DI)</div><div class="tk">LSE: BME</div></td>
+        <td><div class="who">Jonathan Parry</div><div class="role">Jonathan Parry is a person discharging managerial responsibilities in relation to the Issuer&#x27;s Group, being the Retail and Supply Director.</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">30,452</td>
+        <td class="why">role is not CFO: &#x27;Jonathan Parry is a person discharging managerial responsibilities in relation t&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/b-m-european-value-retail-s-a-di---bme/director-pdmr-shareholding/9741675" target="_blank" rel="noopener">RNS 9741675</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">B&amp;M European Value Retail S.A. (DI)</div><div class="tk">LSE: BME</div></td>
+        <td><div class="who">Alexander Simpson</div><div class="role">Alexander Simpson is a person discharging managerial responsibilities in relation to the Issuer&#x27;s Group, being the Group General Counsel and Company Secretary.</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">29,281</td>
+        <td class="why">role is not CFO: &#x27;Alexander Simpson is a person discharging managerial responsibilities in relatio&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/b-m-european-value-retail-s-a-di---bme/director-pdmr-shareholding/9741675" target="_blank" rel="noopener">RNS 9741675</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Liontrust Asset Management</div><div class="tk">LSE: LIO</div></td>
+        <td><div class="who">Martin Gilbert</div><div class="role">PDMR ( Non-executive Director)</div></td>
+        <td class="dt">26 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">172,540</td>
+        <td class="why">role is not CFO: &#x27;PDMR ( Non-executive Director)&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/liontrust-asset-management--lio/director-pdmr-shareholding/9741546" target="_blank" rel="noopener">RNS 9741546</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Savills</div><div class="tk">LSE: SVS</div></td>
+        <td><div class="who">Simon Shaw</div><div class="role">Group Chief Executive/ Director</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">2</td>
+        <td class="why">role is not CFO: &#x27;Group Chief Executive/ Director&#x27;; performance share plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/savills--svs/director-pdmr-shareholding/9741507" target="_blank" rel="noopener">RNS 9741507</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Savills</div><div class="tk">LSE: SVS</div></td>
+        <td><div class="who">Nick Sanderson</div><div class="role">Group Chief Financial Officer/ Director</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">3</td>
+        <td class="why">performance share plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/savills--svs/director-pdmr-shareholding/9741507" target="_blank" rel="noopener">RNS 9741507</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Savills</div><div class="tk">LSE: SVS</div></td>
+        <td><div class="who">Rasheed Hassan</div><div class="role">Head of Global Cross Border Investment/ PDMR</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Head of Global Cross Border Investment/ PDMR&#x27;; performance share plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/savills--svs/director-pdmr-shareholding/9741507" target="_blank" rel="noopener">RNS 9741507</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Savills</div><div class="tk">LSE: SVS</div></td>
+        <td><div class="who">Chris Lee</div><div class="role">Group Legal Director &amp; Company Secretary/ PDMR</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Group Legal Director &amp; Company Secretary/ PDMR&#x27;; performance share plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/savills--svs/director-pdmr-shareholding/9741507" target="_blank" rel="noopener">RNS 9741507</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Rockfire Resources</div><div class="tk">LSE: ROCK</div></td>
+        <td><div class="who">Name Position 1)    Gordon Hart 2)    David Price 3)    Ian Staunton 4)    Patrick Elliott 5)    Nicholas Walley 6)    Steven Hunt 1)    Chairman 2)    Chief Executive Officer 3)    Non-Executive Director 4)    Non-Executive Director 5)    Non-Executive Director 6)    Non-Executive Director</div><div class="role">See 1a) above</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">1</td>
+        <td class="why">role is not CFO: &#x27;See 1a) above&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/rockfire-resources--rock/grant-of-options/9740924" target="_blank" rel="noopener">RNS 9740924</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Altitude Group</div><div class="tk">LSE: ALT</div></td>
+        <td><div class="who">Richard Sowerby</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">03 Jul 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">300,000</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/altitude-group--alt/grant-of-options-and-pdmr-dealing/9739912" target="_blank" rel="noopener">RNS 9739912</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">S&amp;U</div><div class="tk">LSE: SUS</div></td>
+        <td><div class="who">The Estate of Mrs CMG Coombs</div><div class="role">Executors of the estate of Mrs CMG Coombs</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">37,800</td>
+        <td class="why">role is not CFO: &#x27;Executors of the estate of Mrs CMG Coombs&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/s-u--sus/director-pdmr-shareholding/9739753" target="_blank" rel="noopener">RNS 9739753</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">S&amp;U</div><div class="tk">LSE: SUS</div></td>
+        <td><div class="who">The Estate of Mrs CMG Coombs</div><div class="role">Executors of the estate of Mrs CMG Coombs</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">37,801</td>
+        <td class="why">role is not CFO: &#x27;Executors of the estate of Mrs CMG Coombs&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/s-u--sus/director-pdmr-shareholding/9739753" target="_blank" rel="noopener">RNS 9739753</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">S&amp;U</div><div class="tk">LSE: SUS</div></td>
+        <td><div class="who">Anthony Coombs</div><div class="role">Chairman</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">37,800</td>
+        <td class="why">role is not CFO: &#x27;Chairman&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/s-u--sus/director-pdmr-shareholding/9739753" target="_blank" rel="noopener">RNS 9739753</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">S&amp;U</div><div class="tk">LSE: SUS</div></td>
+        <td><div class="who">Graham Coombs</div><div class="role">Deputy Chairman</div></td>
+        <td class="dt">25 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">37,801</td>
+        <td class="why">role is not CFO: &#x27;Deputy Chairman&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/s-u--sus/director-pdmr-shareholding/9739753" target="_blank" rel="noopener">RNS 9739753</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">Georges Elhedery</div><div class="role">Group Chief Executive</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Group Chief Executive&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">Pam Kaur</div><div class="role">Group Chief Financial Officer</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">Richard Blackburn</div><div class="role">Group Chief Risk and Compliance Officer</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Group Chief Risk and Compliance Officer&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">David Liao</div><div class="role">Co-Chief Executive, Asia and Middle East</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Co-Chief Executive, Asia and Middle East&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">Barry O&#x27;Byrne</div><div class="role">CEO, International Wealth and Premier Banking</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;CEO, International Wealth and Premier Banking&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">Stuart Riley</div><div class="role">Group Chief Information Officer</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Group Chief Information Officer&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">Michael Roberts</div><div class="role">CEO, HSBC Bank plc and CEO, Corporate and Institutional Banking</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;CEO, HSBC Bank plc and CEO, Corporate and Institutional Banking&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">Surendra Rosha</div><div class="role">Co-Chief Executive, Asia and Middle East</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Co-Chief Executive, Asia and Middle East&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">HSBC Holdings</div><div class="tk">LSE: HSBA</div></td>
+        <td><div class="who">Suzanna White</div><div class="role">Group Chief Operating Officer</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Group Chief Operating Officer&#x27;; dividend-related, not open-market cash</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hsbc-holdings--hsba/notification-of-transactions-by-pdmrs/9739654" target="_blank" rel="noopener">RNS 9739654</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Thungela Resources Limited NPV (DI)</div><div class="tk">LSE: TGA</div></td>
+        <td><div class="who">Moses Madondo</div><div class="role">PDMR - Chief Executive Officer</div></td>
+        <td class="dt">20 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">26,279</td>
+        <td class="why">role is not CFO: &#x27;PDMR - Chief Executive Officer&#x27;; vesting of an award</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/thungela-resources-limited-npv-di---tga/dealings-in-securities/9739440" target="_blank" rel="noopener">RNS 9739440</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">BHP Group Limited NPV (DI)</div><div class="tk">LSE: BHP</div></td>
+        <td><div class="who">Brandon Craig</div><div class="role">PDMR (Chief Executive Officer)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">29,756</td>
+        <td class="why">role is not CFO: &#x27;PDMR (Chief Executive Officer)&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bhp-group-limited-npv-di---bhp/pdmr-shareholding/9739363" target="_blank" rel="noopener">RNS 9739363</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">BHP Group Limited NPV (DI)</div><div class="tk">LSE: BHP</div></td>
+        <td><div class="who">Jessica Farrell</div><div class="role">PDMR (President Americas)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">16,196</td>
+        <td class="why">role is not CFO: &#x27;PDMR (President Americas)&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bhp-group-limited-npv-di---bhp/pdmr-shareholding/9739363" target="_blank" rel="noopener">RNS 9739363</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">BHP Group Limited NPV (DI)</div><div class="tk">LSE: BHP</div></td>
+        <td><div class="who">Geraldine Slattery</div><div class="role">PDMR (President Australia)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">69,256</td>
+        <td class="why">role is not CFO: &#x27;PDMR (President Australia)&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bhp-group-limited-npv-di---bhp/pdmr-shareholding/9739363" target="_blank" rel="noopener">RNS 9739363</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">BHP Group Limited NPV (DI)</div><div class="tk">LSE: BHP</div></td>
+        <td><div class="who">Vandita Pant</div><div class="role">PDMR (Chief Financial Officer)</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">54,593</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/bhp-group-limited-npv-di---bhp/pdmr-shareholding/9739363" target="_blank" rel="noopener">RNS 9739363</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Premier Foods</div><div class="tk">LSE: PFD</div></td>
+        <td><div class="who">David Wilkinson</div><div class="role">Human Resources and Communications Director</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">406,680</td>
+        <td class="why">role is not CFO: &#x27;Human Resources and Communications Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/premier-foods--pfd/director-pdmr-shareholding/9738923" target="_blank" rel="noopener">RNS 9738923</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Wizz Air Holdings</div><div class="tk">LSE: WIZZ</div></td>
+        <td><div class="who">Stephen Johnson</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">19 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">15,000</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/wizz-air-holdings--wizz/director-pdmr-shareholding/9738712" target="_blank" rel="noopener">RNS 9738712</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Nando Cesarone</div><div class="role">Director</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">11</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Angus Cockburn</div><div class="role">Director</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">11</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Jill Easterbrook</div><div class="role">Director</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">11</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Renata Ribeiro</div><div class="role">Director</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">11</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">James Singleton</div><div class="role">Director</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">11</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Roy Twite</div><div class="role">Director</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">11</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Paul Walker</div><div class="role">Director</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">11</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Barbara Clark</div><div class="role">Senior Vice President and Chief Accounting Officer</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">47</td>
+        <td class="why">role is not CFO: &#x27;Senior Vice President and Chief Accounting Officer&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Lynne Fuller-Andrews</div><div class="role">Executive Vice President, General Counsel and Corporate Secretary</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">67</td>
+        <td class="why">role is not CFO: &#x27;Executive Vice President, General Counsel and Corporate Secretary&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Brendan Horgan</div><div class="role">Director and Chief Executive</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">479</td>
+        <td class="why">role is not CFO: &#x27;Director and Chief Executive&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Kyle Horgan</div><div class="role">Executive Vice President, Specialty</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">76</td>
+        <td class="why">role is not CFO: &#x27;Executive Vice President, Specialty&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Brad Lull</div><div class="role">Executive Vice President, Strategy and Business Development</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">76</td>
+        <td class="why">role is not CFO: &#x27;Executive Vice President, Strategy and Business Development&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Alex Pease</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">144</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">John Washburn</div><div class="role">Executive Vice President, Chief Operating Officer, General Tool</div></td>
+        <td class="dt">10 Jul 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">76</td>
+        <td class="why">role is not CFO: &#x27;Executive Vice President, Chief Operating Officer, General Tool&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9737580" target="_blank" rel="noopener">RNS 9737580</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cohort</div><div class="tk">LSE: CHRT</div></td>
+        <td><div class="who">Andrew Thomis</div><div class="role">Chief Executive</div></td>
+        <td class="dt">20 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">23,247</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cohort--chrt/director-pdmr-shareholding/9737484" target="_blank" rel="noopener">RNS 9737484</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cohort</div><div class="tk">LSE: CHRT</div></td>
+        <td><div class="who">Simon Walther</div><div class="role">Finance Director</div></td>
+        <td class="dt">20 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">17,269</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cohort--chrt/director-pdmr-shareholding/9737484" target="_blank" rel="noopener">RNS 9737484</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cohort</div><div class="tk">LSE: CHRT</div></td>
+        <td><div class="who">Christopher Axcell</div><div class="role">Chief Operating Officer</div></td>
+        <td class="dt">20 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">15,068</td>
+        <td class="why">role is not CFO: &#x27;Chief Operating Officer&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cohort--chrt/director-pdmr-shareholding/9737484" target="_blank" rel="noopener">RNS 9737484</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Cohort</div><div class="tk">LSE: CHRT</div></td>
+        <td><div class="who">Christopher Axcell</div><div class="role">Chief Operating Office</div></td>
+        <td class="dt">24 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">4,435</td>
+        <td class="why">role is not CFO: &#x27;Chief Operating Office&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/cohort--chrt/director-pdmr-shareholding/9737484" target="_blank" rel="noopener">RNS 9737484</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Seplat Energy (DI)</div><div class="tk">LSE: SEPL</div></td>
+        <td><div class="who">Effiong Okon</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">18 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">2,026</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/seplat-energy-di---sepl/notification-of-transactions-ltip-/9737369" target="_blank" rel="noopener">RNS 9737369</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Seplat Energy (DI)</div><div class="tk">LSE: SEPL</div></td>
+        <td><div class="who">Effiong Okon</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">18 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">2,025</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/seplat-energy-di---sepl/notification-of-transactions-ltip-/9737369" target="_blank" rel="noopener">RNS 9737369</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Seplat Energy (DI)</div><div class="tk">LSE: SEPL</div></td>
+        <td><div class="who">Samson Ezugworie</div><div class="role">Chief Operations Officer</div></td>
+        <td class="dt">18 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">2,026</td>
+        <td class="why">role is not CFO: &#x27;Chief Operations Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/seplat-energy-di---sepl/notification-of-transactions-ltip-/9737369" target="_blank" rel="noopener">RNS 9737369</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Seplat Energy (DI)</div><div class="tk">LSE: SEPL</div></td>
+        <td><div class="who">Samson Ezugworie</div><div class="role">Chief Operations Officer</div></td>
+        <td class="dt">18 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">2,025</td>
+        <td class="why">role is not CFO: &#x27;Chief Operations Officer&#x27;; long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/seplat-energy-di---sepl/notification-of-transactions-ltip-/9737369" target="_blank" rel="noopener">RNS 9737369</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Seplat Energy (DI)</div><div class="tk">LSE: SEPL</div></td>
+        <td><div class="who">Eleanor Adaralegbe</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">18 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">2,026</td>
+        <td class="why">long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/seplat-energy-di---sepl/notification-of-transactions-ltip-/9737369" target="_blank" rel="noopener">RNS 9737369</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Seplat Energy (DI)</div><div class="tk">LSE: SEPL</div></td>
+        <td><div class="who">Eleanor Adaralegbe</div><div class="role">Chief Financial Officer</div></td>
+        <td class="dt">18 Aug 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">2,025</td>
+        <td class="why">long-term incentive plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/seplat-energy-di---sepl/notification-of-transactions-ltip-/9737369" target="_blank" rel="noopener">RNS 9737369</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Hikma Pharmaceuticals</div><div class="tk">LSE: HIK</div></td>
+        <td><div class="who">Said Darwazah</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">0</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hikma-pharmaceuticals--hik/director-pdmr-shareholding/9737280" target="_blank" rel="noopener">RNS 9737280</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Hikma Pharmaceuticals</div><div class="tk">LSE: HIK</div></td>
+        <td><div class="who">Mazen Darwazeh</div><div class="role">Executive Vice Chairman and Deputy CEO, MENA</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">0</td>
+        <td class="why">role is not CFO: &#x27;Executive Vice Chairman and Deputy CEO, MENA&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hikma-pharmaceuticals--hik/director-pdmr-shareholding/9737280" target="_blank" rel="noopener">RNS 9737280</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Hikma Pharmaceuticals</div><div class="tk">LSE: HIK</div></td>
+        <td><div class="who">Ali Al-Husry</div><div class="role">Non-Executive Director</div></td>
+        <td class="dt">21 Aug 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">0</td>
+        <td class="why">role is not CFO: &#x27;Non-Executive Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hikma-pharmaceuticals--hik/director-pdmr-shareholding/9737280" target="_blank" rel="noopener">RNS 9737280</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">DSW Capital</div><div class="tk">LSE: DSW</div></td>
+        <td><div class="who">Shrutisha (&quot;Shru&quot;) Morris</div><div class="role">Chief Executive Officer</div></td>
+        <td class="dt">03 Sep 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">0</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer&#x27;; performance share plan</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/dsw-capital--dsw/grant-of-options-under-performance-share-plan-/9756494" target="_blank" rel="noopener">RNS 9756494</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ondo Insurtech</div><div class="tk">LSE: ONDO</div></td>
+        <td><div class="who">Craig Foster</div><div class="role">Chief Executive Officer and PDMR</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">2,308</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer and PDMR&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ondo-insurtech--ondo/director-pdmr-shareholding/9757399" target="_blank" rel="noopener">RNS 9757399</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Ondo Insurtech</div><div class="tk">LSE: ONDO</div></td>
+        <td><div class="who">Kevin Withington</div><div class="role">Chief Financial Officer and PDMR</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">2,038</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/ondo-insurtech--ondo/director-pdmr-shareholding/9757399" target="_blank" rel="noopener">RNS 9757399</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Nando Cesarone</div><div class="role">Director</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Angus Cockburn</div><div class="role">Director</div></td>
+        <td class="dt">31 Aug 2026 +</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Jill Easterbrook</div><div class="role">Director</div></td>
+        <td class="dt">31 Aug 2026 +</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Cynthia Jamison</div><div class="role">Director</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Renata Ribeiro</div><div class="role">Director</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Ekta Singh-Bushell</div><div class="role">Director</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">James Singleton</div><div class="role">Director</div></td>
+        <td class="dt">01 Sep 2026</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Roy Twite</div><div class="role">Director</div></td>
+        <td class="dt">31 Aug 2026 +</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Sunbelt Rentals Holdings, Inc.</div><div class="tk">LSE: SUNB</div></td>
+        <td><div class="who">Paul Walker</div><div class="role">Director</div></td>
+        <td class="dt">31 Aug 2026 +</td>
+        <td class="num val">$0.00</td>
+        <td class="num">2,354</td>
+        <td class="why">role is not CFO: &#x27;Director&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/prn/sunbelt-rentals-holdings-inc---sunb/transactions-by-directors-and-persons-dischar-/9757359" target="_blank" rel="noopener">RNS 9757359</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Savannah Energy</div><div class="tk">LSE: SAVE</div></td>
+        <td><div class="who">Andrew Knott</div><div class="role">Chief Executive Officer and Director</div></td>
+        <td class="dt">04 Sep 2026 (filed)</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">&mdash;</td>
+        <td class="why">role is not CFO: &#x27;Chief Executive Officer and Director&#x27;; transfer/gift, not a market purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/savannah-energy--save/director-pdmr-shareholding/9757329" target="_blank" rel="noopener">RNS 9757329</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Savills</div><div class="tk">LSE: SVS</div></td>
+        <td><div class="who">Nick Sanderson (Director)</div><div class="role">Group Chief Financial Officer</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">79,653</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/savills--svs/director-pdmr-shareholding/9757325" target="_blank" rel="noopener">RNS 9757325</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Blencowe Resources</div><div class="tk">LSE: BRES</div></td>
+        <td><div class="who">1. Cameron Pearce</div><div class="role">1. Director</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">&mdash;</td>
+        <td class="num">1</td>
+        <td class="why">role is not CFO: &#x27;1. Director&#x27;; share options</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/blencowe-resources--bres/exercise-of-share-options-replacement/9757311" target="_blank" rel="noopener">RNS 9757311</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Hays</div><div class="tk">LSE: HAS</div></td>
+        <td><div class="who">Mark Dearnley</div><div class="role">CEO, PDMR</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">266,621</td>
+        <td class="why">role is not CFO: &#x27;CEO, PDMR&#x27;; nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hays--has/director-pdmr-shareholding/9757299" target="_blank" rel="noopener">RNS 9757299</a></td>
+      </tr>
+      <tr>
+        <td><div class="co">Hays</div><div class="tk">LSE: HAS</div></td>
+        <td><div class="who">James Hilton</div><div class="role">CFO, PDMR</div></td>
+        <td class="dt">04 Sep 2026</td>
+        <td class="num val">£0.00</td>
+        <td class="num">350,919</td>
+        <td class="why">nil consideration - award or grant, not a cash purchase</td>
+        <td class="src"><a href="https://www.investegate.co.uk/announcement/rns/hays--has/director-pdmr-shareholding/9757299" target="_blank" rel="noopener">RNS 9757299</a></td>
+      </tr>
+    </tbody></table></div>
+
+  <div class="method">
+    <b>Pipeline</b> &mdash; scrape &rarr; parse &rarr; filter &rarr; rank
+    <div class="filters">
+      <div><div class="k">Source</div><div class="v">investegate.co.uk/category/directors-dealings</div></div>
+      <div><div class="k">Category filter</div><div class="v">Whole category feed; headlines are not standardised so they are not filtered on</div></div>
+      <div><div class="k">Role filter</div><div class="v">CFO in the main table; the CFO's PCAs, General Counsel and GC's PCAs (all dealings, tagged Purchase/Sale/Other) in their own section; every other role excluded</div></div>
+      <div><div class="k">Type filter</div><div class="v">Acquisition, excl. scrip/SIP/dividend/options/awards/nil-price</div></div>
+      <div><div class="k">Rank by</div><div class="v">GBP value desc &middot; FX: ECB reference rates 2026-09-09</div></div>
+    </div>
+  </div>
+</main>
+
+<footer>NOT INVESTMENT ADVICE &middot; ALL ROWS ARE SCRAPED FROM LIVE RNS FILINGS &middot; VALUES ARE PRICE &times; VOLUME AS FILED</footer>
+
+</body>
+</html>
